@@ -1,4 +1,7 @@
 # Game simulator
+
+A game for warriors, console warriors.
+
 # Game functions:
 
 ⚔️ Fight deadly monsters,
