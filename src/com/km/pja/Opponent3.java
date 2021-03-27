@@ -1,16 +1,20 @@
 package com.km.pja;
 
-public class Character {
+
+
+public class Opponent3 {
     private int hp;
     private Weapon weapon;
     private Armour armour;
     private String name;
+    private int points;
 
-    public Character(int hp, Weapon weapon, Armour armour, String name) {
+    public Opponent3(int hp, Weapon weapon, Armour armour, String name) {
         this.hp = hp;
         this.weapon = weapon;
         this.armour = armour;
         this.name = name;
+        this.points = hp;
     }
 
     public boolean getHit(int hits, int hitStrength){
@@ -66,7 +70,23 @@ public class Character {
         return hp == 0;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
     public void printHp(){
         System.out.println(Constants.ANSI_RED + name + ", hp: " + hp + Constants.ANSI_RESET);
+    }
+
+    @Override
+    public String toString() {
+        return "Opponent " + name + ", " +
+                "hp: " + hp +
+                " xp: " + points +
+                ", " + weapon +
+                ", " + armour;
     }
 }

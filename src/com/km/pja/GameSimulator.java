@@ -1,10 +1,18 @@
 package com.km.pja;
-
-
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class GameSimulator {
+
+    private static final String [] avatars = new String[]{
+         "\uD83E\uDDB8\u200D♂️",
+            "\uD83E\uDDB9",
+            "\uD83D\uDC6E",
+            "\uD83D\uDC77",
+            "\uD83E\uDDD9",
+            "\uD83E\uDDD9\u200D♀️"
+    };
 
     private static final Armour[] armours = new Armour[]{
             new Armour(1, "\uD83D\uDEE1"),
@@ -22,12 +30,12 @@ public class GameSimulator {
     };
 
     private static final Opponent[] opponents = new Opponent[]{
-            new Opponent(20, weapons[1], armours[1], "\uD83E\uDD84"),
-            new Opponent(13, weapons[2], armours[1], "\uD83D\uDC02"),
-            new Opponent(15, weapons[3], armours[2], "\uD83E\uDD96"),
-            new Opponent(17, weapons[2], armours[3], "\uD83D\uDD77"),
-            new Opponent(28, weapons[4], armours[2], "\uD83E\uDD82"),
-            new Opponent(39, weapons[2], armours[1], "\uD83E\uDD9F"),
+            new Opponent(20, weapons[1], armours[1], "", "\uD83E\uDD84"),
+            new Opponent(13, weapons[2], armours[1], "","\uD83D\uDC02"),
+            new Opponent(15, weapons[3], armours[2], "","\uD83E\uDD96"),
+            new Opponent(17, weapons[2], armours[3], "","\uD83D\uDD77"),
+            new Opponent(28, weapons[4], armours[2], "","\uD83E\uDD82"),
+            new Opponent(39, weapons[2], armours[1], "","\uD83E\uDD9F"),
     };
 
     private static final Potion[] potions = new Potion[]{
@@ -36,15 +44,17 @@ public class GameSimulator {
             new Potion(12, "\uD83D\uDECF"),
     };
 
-    private static Player player = new Player(50, weapons[0], armours[1], "Joe");
+    private static Player player = new Player(50, weapons[0], armours[1], "Sam","\uD83E\uDDB8");
+
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         while (true){
             System.out.println("Choose mode: ");
-            System.out.println("1 => change weapon, 2 => change armour, 3 => fight, 4 => info, 5=> potions, 6=> quit");
+            System.out.println("0:edit character 1:change weapon, 2:change armour, 3:fight, 4:info, 5:potions, 6:quit");
             int mode = scanner.nextInt();
             switch (mode){
+                case 0: editCharacter(); break;
                 case 1: changeWeapon(); break;
                 case 2:  changeArmour(); break;
                 case 3: {
@@ -61,6 +71,40 @@ public class GameSimulator {
 
     }
 
+    public static void editCharacter(){
+        System.out.println("Current info about you: ");
+        System.out.println(player.toString());
+        System.out.println("0: change name");
+        System.out.println("1: change avatar");
+        int choice = scanner.nextInt();
+        switch (choice){
+            case 0: changeName(); break;
+            case 1: changeAvatar(); break;
+            default: break;
+        }
+
+    }
+
+    private static void changeAvatar() {
+        System.out.println("Choose an avatar: ");
+        for (int i = 0; i < Constants.getAvatars().length; i++) {
+            System.out.println(i+ ": " + Constants.getAvatars()[i]);
+        }
+        int choice = scanner.nextInt();
+        if (0 <= choice && choice < Constants.getAvatars().length){
+            player.setAvatar(Constants.getAvatars()[choice]);
+            System.out.println(player.toString());
+        }
+    }
+
+    private static void changeName() {
+        System.out.println("Input a new name: ");
+        String name = scanner.next();
+        player.setName(name);
+        System.out.println(player.toString());
+
+    }
+
     private static void fight(int choice){
         Opponent opponent = opponents[choice];
         boolean playerTurn = true;
@@ -68,7 +112,7 @@ public class GameSimulator {
 
         while (!player.isDead() && !opponent.isDead()){
             if (playerTurn){
-                System.out.println("1 => attack, 2=> retreat (! you'll lose some xp)");
+                System.out.println("1:attack, 2:retreat (! you'll lose some xp)");
                 int decision = scanner.nextInt();
                 switch (decision){
                     case 1: {
@@ -127,7 +171,6 @@ public class GameSimulator {
     }
 
     public static void changeWeapon(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Choose weapon: ");
         for (int i = 0; i < weapons.length; i++) {
             System.out.println(i+ ": " + weapons[i].getName());
@@ -160,10 +203,10 @@ public class GameSimulator {
         System.out.println("Choose opponent: ");
         for (int i = 0; i < opponents.length; i++) {
             if(opponents[i].isDead()){
-                System.out.println(Constants.ANSI_WHITE + i+ ": " + opponents[i].getName() + Constants.ANSI_RESET);
+                System.out.println(Constants.ANSI_WHITE + i+ ": " + opponents[i].getAvatar() + Constants.ANSI_RESET);
             }
             else {
-                System.out.println(Constants.ANSI_BLACK + i+ ": " + opponents[i].getName() +  Constants.ANSI_RESET);
+                System.out.println(Constants.ANSI_BLACK + i+ ": " + opponents[i].getAvatar() +  Constants.ANSI_RESET);
             }
         }
         int choice = scanner.nextInt();

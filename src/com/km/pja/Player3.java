@@ -1,20 +1,40 @@
 package com.km.pja;
 
 
+import java.util.Random;
 
-public class Opponent {
+public class Player3 {
     private int hp;
+    private String avatar;
     private Weapon weapon;
     private Armour armour;
     private String name;
-    private int points;
+    private int score;
+    private final int MAX_HP = 50;
 
-    public Opponent(int hp, Weapon weapon, Armour armour, String name) {
+    public Player3(int hp, Weapon weapon, Armour armour, String name, String avatar) {
         this.hp = hp;
         this.weapon = weapon;
         this.armour = armour;
         this.name = name;
-        this.points = hp;
+        this.score = 0;
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public boolean getHit(int hits, int hitStrength){
@@ -28,10 +48,18 @@ public class Opponent {
             return true;
         }
         else {
-            System.out.println(Constants.ANSI_RED + "Monster missed your hit!" + Constants.ANSI_RESET);
+            System.out.println(Constants.ANSI_RED + "You missed a hit by a whisker!" + Constants.ANSI_RESET);
             return false;
         }
 
+    }
+
+    public void takePotion(int potionStrength){
+        if(hp + potionStrength > MAX_HP) {
+            hp = MAX_HP;
+            System.out.println("Your health is full \uD83D\uDCAA");
+        }
+        else hp += potionStrength;
     }
 
     public int getHp() {
@@ -70,22 +98,15 @@ public class Opponent {
         return hp == 0;
     }
 
-    public int getPoints() {
-        return points;
-    }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
     public void printHp(){
         System.out.println(Constants.ANSI_RED + name + ", hp: " + hp + Constants.ANSI_RESET);
     }
-
     @Override
     public String toString() {
-        return "Opponent " + name + ", " +
-                "hp: " + hp +
-                " xp: " + points +
+        return "Player " + avatar + name +
+                ", hp: " + hp +
+                ", xp: " + score +
                 ", " + weapon +
                 ", " + armour;
     }
