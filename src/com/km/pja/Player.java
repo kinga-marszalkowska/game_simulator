@@ -28,4 +28,9 @@ public class Player extends GenericPlayer{
     public void setScore(int score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "score: " + score;
+    }
 }

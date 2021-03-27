@@ -1,48 +1,14 @@
 package com.km.pja;
 import java.util.Random;
 import java.util.Scanner;
+import static com.km.pja.Constants.weapons;
+import static com.km.pja.Constants.armours;
+import static com.km.pja.Constants.avatars;
+import static com.km.pja.Constants.opponents;
+import static com.km.pja.Constants.potions;
 
 
 public class GameSimulator {
-
-    private static final String [] avatars = new String[]{
-         "\uD83E\uDDB8\u200D♂️",
-            "\uD83E\uDDB9",
-            "\uD83D\uDC6E",
-            "\uD83D\uDC77",
-            "\uD83E\uDDD9",
-            "\uD83E\uDDD9\u200D♀️"
-    };
-
-    private static final Armour[] armours = new Armour[]{
-            new Armour(1, "\uD83D\uDEE1"),
-            new Armour(2, "\uD83D\uDDD1"),
-            new Armour(3, "fat belly"),
-            new Armour(2, "\uD83E\uDE79"),
-            new Armour(1, "⚰"),
-    };
-    private static final Weapon[] weapons = new Weapon[]{
-            new Weapon(3, "\uD83D\uDDE1"),
-            new Weapon(6, "\uD83D\uDCA3"),
-            new Weapon(7, "\uD83D\uDD2B"),
-            new Weapon(8, "\uD83D\uDD28"),
-            new Weapon(5, "\uD83E\uDE93"),
-    };
-
-    private static final Opponent[] opponents = new Opponent[]{
-            new Opponent(20, weapons[1], armours[1], "", "\uD83E\uDD84"),
-            new Opponent(13, weapons[2], armours[1], "","\uD83D\uDC02"),
-            new Opponent(15, weapons[3], armours[2], "","\uD83E\uDD96"),
-            new Opponent(17, weapons[2], armours[3], "","\uD83D\uDD77"),
-            new Opponent(28, weapons[4], armours[2], "","\uD83E\uDD82"),
-            new Opponent(39, weapons[2], armours[1], "","\uD83E\uDD9F"),
-    };
-
-    private static final Potion[] potions = new Potion[]{
-            new Potion(10, "⚗"),
-            new Potion(5, "\uD83E\uDDEA"),
-            new Potion(12, "\uD83D\uDECF"),
-    };
 
     private static Player player = new Player(50, weapons[0], armours[1], "Sam","\uD83E\uDDB8");
 
@@ -87,12 +53,12 @@ public class GameSimulator {
 
     private static void changeAvatar() {
         System.out.println("Choose an avatar: ");
-        for (int i = 0; i < Constants.getAvatars().length; i++) {
-            System.out.println(i+ ": " + Constants.getAvatars()[i]);
+        for (int i = 0; i < avatars.length; i++) {
+            System.out.println(i+ ": " + avatars[i]);
         }
         int choice = scanner.nextInt();
-        if (0 <= choice && choice < Constants.getAvatars().length){
-            player.setAvatar(Constants.getAvatars()[choice]);
+        if (0 <= choice && choice < avatars.length){
+            player.setAvatar(avatars[choice]);
             System.out.println(player.toString());
         }
     }
@@ -157,7 +123,6 @@ public class GameSimulator {
     }
 
     public static void takePotion(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Choose potion: ");
         for (int i = 0; i < potions.length; i++) {
             System.out.println(i+ ": " + potions[i].getName());
@@ -185,7 +150,6 @@ public class GameSimulator {
     }
 
     public static void changeArmour(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Choose armour: ");
         for (int i = 0; i < armours.length; i++) {
             System.out.println(i+ ": " + armours[i].getName());
@@ -199,8 +163,7 @@ public class GameSimulator {
     }
 
     public static void prepareForFight(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose opponent: ");
+        System.out.println("Choose opponent: (any other key to resign)");
         for (int i = 0; i < opponents.length; i++) {
             if(opponents[i].isDead()){
                 System.out.println(Constants.ANSI_WHITE + i+ ": " + opponents[i].getAvatar() + Constants.ANSI_RESET);

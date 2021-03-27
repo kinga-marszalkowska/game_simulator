@@ -12,14 +12,14 @@ public class Constants {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    private static final Armour[] armours = new Armour[]{
+    static final Armour[] armours = new Armour[]{
             new Armour(1, "\uD83D\uDEE1"),
             new Armour(2, "\uD83D\uDDD1"),
             new Armour(3, "fat belly"),
             new Armour(2, "\uD83E\uDE79"),
             new Armour(1, "⚰"),
     };
-    private static final Weapon[] weapons = new Weapon[]{
+    static final Weapon[] weapons = new Weapon[]{
             new Weapon(3, "\uD83D\uDDE1"),
             new Weapon(6, "\uD83D\uDCA3"),
             new Weapon(7, "\uD83D\uDD2B"),
@@ -27,22 +27,23 @@ public class Constants {
             new Weapon(5, "\uD83E\uDE93"),
     };
 
-    private static final Opponent3[] opponents = new Opponent3[]{
-            new Opponent3(20, weapons[1], armours[1], "\uD83E\uDD84"),
-            new Opponent3(13, weapons[2], armours[1], "\uD83D\uDC02"),
-            new Opponent3(15, weapons[3], armours[2], "\uD83E\uDD96"),
-            new Opponent3(17, weapons[2], armours[3], "\uD83D\uDD77"),
-            new Opponent3(28, weapons[4], armours[2], "\uD83E\uDD82"),
-            new Opponent3(39, weapons[2], armours[1], "\uD83E\uDD9F"),
+    static final Opponent[] opponents = new Opponent[]{
+            new Opponent(20, weapons[1], armours[1], "", "\uD83E\uDD84"),
+            new Opponent(13, weapons[2], armours[1], "","\uD83D\uDC02"),
+            new Opponent(15, weapons[3], armours[2], "","\uD83E\uDD96"),
+            new Opponent(17, weapons[2], armours[3], "","\uD83D\uDD77"),
+            new Opponent(28, weapons[4], armours[2], "","\uD83E\uDD82"),
+            new Opponent(39, weapons[2], armours[1], "","\uD83E\uDD9F"),
     };
 
-    private static final Potion[] potions = new Potion[]{
+
+    static final Potion[] potions = new Potion[]{
             new Potion(10, "⚗"),
             new Potion(5, "\uD83E\uDDEA"),
             new Potion(12, "\uD83D\uDECF"),
     };
 
-    private static final String [] avatars = new String[]{
+    static final String [] avatars = new String[]{
             "\uD83E\uDDB8\u200D♂️",
             "\uD83E\uDDB9",
             "\uD83D\uDC6E",
@@ -51,23 +52,4 @@ public class Constants {
             "\uD83E\uDDD9\u200D♀️"
     };
 
-    public static Armour[] getArmours() {
-        return armours;
-    }
-
-    public static Weapon[] getWeapons() {
-        return weapons;
-    }
-
-    public static Opponent3[] getOpponents() {
-        return opponents;
-    }
-
-    public static Potion[] getPotions() {
-        return potions;
-    }
-
-    public static String[] getAvatars() {
-        return avatars;
-    }
 }

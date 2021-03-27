@@ -1,40 +1,19 @@
 package com.km.pja;
 
-
-import java.util.Random;
-
-public class Player3 {
+public class GenericPlayer {
     private int hp;
     private String avatar;
     private Weapon weapon;
     private Armour armour;
     private String name;
-    private int score;
     private final int MAX_HP = 50;
 
-    public Player3(int hp, Weapon weapon, Armour armour, String name, String avatar) {
+    public GenericPlayer(int hp, String avatar, Weapon weapon, Armour armour, String name) {
         this.hp = hp;
+        this.avatar = avatar;
         this.weapon = weapon;
         this.armour = armour;
         this.name = name;
-        this.score = 0;
-        this.avatar = avatar;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public boolean getHit(int hits, int hitStrength){
@@ -48,18 +27,26 @@ public class Player3 {
             return true;
         }
         else {
-            System.out.println(Constants.ANSI_RED + "You missed a hit by a whisker!" + Constants.ANSI_RESET);
+            System.out.println(messageOnMissed());
             return false;
         }
 
     }
 
-    public void takePotion(int potionStrength){
-        if(hp + potionStrength > MAX_HP) {
-            hp = MAX_HP;
-            System.out.println("Your health is full \uD83D\uDCAA");
-        }
-        else hp += potionStrength;
+    public String messageOnMissed(){
+        return Constants.ANSI_RED + "Missed!" + Constants.ANSI_RESET;
+    }
+
+    public void printHp(){
+        System.out.println(Constants.ANSI_RED + avatar + " " + name + ", hp: " + hp + Constants.ANSI_RESET);
+    }
+
+    public boolean isDead(){
+        return hp == 0;
+    }
+
+    public int getMAX_HP() {
+        return MAX_HP;
     }
 
     public int getHp() {
@@ -68,6 +55,14 @@ public class Player3 {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Weapon getWeapon() {
@@ -94,20 +89,8 @@ public class Player3 {
         this.name = name;
     }
 
-    public boolean isDead(){
-        return hp == 0;
-    }
-
-
-    public void printHp(){
-        System.out.println(Constants.ANSI_RED + name + ", hp: " + hp + Constants.ANSI_RESET);
-    }
     @Override
     public String toString() {
-        return "Player " + avatar + name +
-                ", hp: " + hp +
-                ", xp: " + score +
-                ", " + weapon +
-                ", " + armour;
+        return avatar + " " + name + ", hp: " + hp + weapon + armour;
     }
 }
